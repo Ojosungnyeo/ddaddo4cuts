@@ -22,6 +22,9 @@ export function FrameScreen({ selected, onSelect, onContinue }: FrameScreenProps
               aria-label={`${option.label} 프레임 선택`}
             >
               <FramePreview frame={option.id} />
+              <span className={`frame-option__label frame-option__label--${option.id}`}>
+                {option.id === 'lime' ? 'neon' : option.id}
+              </span>
             </button>
           ))}
         </div>

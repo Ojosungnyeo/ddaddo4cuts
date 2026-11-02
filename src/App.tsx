@@ -26,6 +26,7 @@ function App() {
       {(screen === 'preparing' || screen === 'shooting') && (
         <CameraScreen
           key={cameraAttempt}
+          frame={selectedFrame}
           isShooting={screen === 'shooting'}
           onReady={() => setScreen('shooting')}
           onComplete={(photos) => {

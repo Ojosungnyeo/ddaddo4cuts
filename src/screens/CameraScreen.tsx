@@ -1,24 +1,20 @@
 import { Mascot } from '../components/Mascot'
 import { useCameraSession } from '../hooks/useCameraSession'
-
-const SHOT_CHARACTERS = [
-  '/assets/figma-mascot.png',
-  '/assets/figma-shot-2.png',
-  '/assets/figma-shot-3.png',
-  '/assets/figma-shot-4.png',
-] as const
+import { FRAMES, type FrameId } from '../types'
 
 interface CameraScreenProps {
+  frame: FrameId
   isShooting: boolean
   onReady: () => void
   onComplete: (photos: string[]) => void
   onRetry: () => void
 }
 
-export function CameraScreen({ isShooting, onReady, onComplete, onRetry }: CameraScreenProps) {
+export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }: CameraScreenProps) {
   const { videoRef, status, error, shotNumber, countdown, flash } = useCameraSession(
     isShooting, onReady, onComplete,
   )
+  const frameImage = FRAMES.find((option) => option.id === frame)?.assetPath
 
   return (
     <main className={`screen camera-screen${isShooting && status === 'ready' ? ' camera-screen--shooting' : ''}`}>
@@ -40,8 +36,8 @@ export function CameraScreen({ isShooting, onReady, onComplete, onRetry }: Camer
         <div className={`camera-stage${isShooting && status === 'ready' ? ' camera-stage--visible' : ''}`}>
           <div className="camera-stage__viewport">
             <video ref={videoRef} autoPlay muted playsInline aria-label="실시간 카메라 미리보기" />
-            <span className={`shot-character shot-character--${shotNumber}`} aria-hidden="true">
-              <img src={SHOT_CHARACTERS[shotNumber - 1]} alt="" />
+            <span className={`shot-frame-overlay shot-frame-overlay--${shotNumber}`} aria-hidden="true">
+              <img src={frameImage} alt="" />
             </span>
           </div>
           <img className="camera-stage__frame" src="/assets/figma-camera-frame.svg" alt="" aria-hidden="true" />
@@ -52,7 +48,7 @@ export function CameraScreen({ isShooting, onReady, onComplete, onRetry }: Camer
           {flash && <div className="camera-stage__flash" aria-hidden="true" />}
         </div>
         {isShooting && status === 'ready' && (
-          <p className="shooting-instruction">화면을 보고 준비해 주세요 · 자동으로 촬영됩니다</p>
+          <p className="shooting-instruction">자동으로 촬영됩니다.</p>
         )}
       </div>
       {!isShooting && <small className="copyright">Copyright ⓒ 2026. DDADDO All rights reserved.</small>}

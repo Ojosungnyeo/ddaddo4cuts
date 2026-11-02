@@ -7,6 +7,14 @@
 }
 
 @font-face {
+  font-family: 'HSGooltokki';
+  src: url('/fonts/HSGooltokki%20.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Pretendard';
   src: url('/assets/Pretendard-Regular.otf') format('opentype');
   font-style: normal;
@@ -62,19 +70,21 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .selection-screen { flex-direction: column; align-items: center; }
 .selection-screen__content { display: flex; flex: 1 1 auto; min-height: 0; width: 100%; flex-direction: column; align-items: center; padding: clamp(16px, 4dvh, 38px) 16px 0; }
 .selection-screen h1 { color: #fff; font-size: clamp(38px, 7dvh, 60px); line-height: 1.35; text-align: center; }
-.frame-options { display: flex; flex: 1 1 auto; min-height: 0; justify-content: center; gap: clamp(24px, 7.8vw, 112px); width: 100%; margin-top: clamp(8px, 2dvh, 18px); }
-.frame-option { flex: none; width: min(186.88px, max(76px, calc((100dvh - 330px) * 1200 / 3628))); height: auto; aspect-ratio: 1200 / 3628; padding: 0; border: 0; background: transparent; transition: transform .15s ease; }
-.frame-option:hover { transform: translateY(-3px); }
-.frame-option--selected { outline: 3px solid var(--color-lime); outline-offset: 7px; }
-.frame-preview { width: 100%; height: 100%; background: var(--color-background); color: #fff; }
-.frame-preview img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.frame-preview span { display: grid; place-items: center; width: 100%; height: 100%; padding: 12px; border: 2px solid #fff; text-align: center; font-size: 14px; }
+.frame-options { display: flex; flex: 1 1 auto; min-height: 0; align-items: flex-start; justify-content: center; gap: clamp(24px, 7.8vw, 112px); width: 100%; margin-top: clamp(8px, 2dvh, 18px); }
+.frame-option { display: flex; flex: none; width: min(186.88px, max(76px, calc((100dvh - 330px) * 1200 / 3628))); height: auto; flex-direction: column; align-items: center; padding: 0; border: 0; background: transparent; }
+.frame-preview { position: relative; width: 100%; background: var(--color-background); color: #fff; }
+.frame-option--selected .frame-preview::after { position: absolute; inset: -8px; border: 5px solid #fff; border-radius: 0; content: ''; pointer-events: none; }
+.frame-preview img { display: block; width: 100%; height: auto; }
+.frame-preview span { display: grid; place-items: center; width: 100%; aspect-ratio: 1200 / 3628; padding: 12px; border: 2px solid #fff; text-align: center; font-size: 14px; }
+.frame-option__label { display: block; margin-top: 10px; color: #fff; font-family: var(--font-display); font-size: 24px; font-weight: 900; line-height: 34px; }
+.frame-option__label--lime { color: var(--color-lime); }
+.frame-option__label--black { color: #000; }
 .selection-screen__button { flex: none; height: 52px; margin: 12px 0 clamp(12px, 3dvh, 28px); }
 .selection-screen .copyright { position: static; flex: none; margin-bottom: 16px; }
 
 .camera-screen__content { display: flex; width: 100%; flex-direction: column; align-items: center; }
 .camera-message { position: absolute; top: clamp(60px, calc(50dvh - 236px), 214px); left: 50%; display: flex; width: min(100%, 1100px); flex-direction: column; align-items: center; text-align: center; transform: translateX(-50%); }
-.camera-message h1 { margin-top: 44px; color: #000; font-size: 64px; line-height: 90px; white-space: nowrap; }
+.camera-message h1 { margin-top: 44px; color: var(--color-white); font-size: 64px; line-height: 90px; white-space: nowrap; }
 .camera-message p { max-width: 650px; margin: 12px 16px 0; color: #fff; font-size: 18px; line-height: 1.5; }
 .camera-message .primary-button { width: min(320px, calc(100vw - 32px)); margin-top: 30px; }
 .camera-stage { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
@@ -84,30 +94,25 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .camera-stage video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scaleX(-1); }
 .camera-stage__frame { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
 .camera-stage__progress { position: absolute; top: 2%; right: 3%; z-index: 2; color: #111; font-family: var(--font-display); font-size: 22px; font-weight: 900; line-height: 1; }
-.shot-character { position: absolute; display: block; overflow: hidden; pointer-events: none; }
-.shot-character img { position: absolute; display: block; max-width: none; }
-.shot-character--1 { top: 26.4%; left: 47.1%; width: 54.4%; height: 73.7%; }
-.shot-character--1 img { top: -25.38%; left: -158.33%; width: 432.64%; height: 171.89%; }
-.shot-character--2 { top: 6.1%; left: 52.1%; width: 48%; height: 93.9%; }
-.shot-character--2 img { top: -0.11%; left: 0; width: 100%; height: 118.86%; }
-.shot-character--3 { top: 2.2%; left: 50.7%; width: 50.6%; height: 97.8%; }
-.shot-character--3 img { top: -0.03%; left: -146.06%; width: 426.62%; height: 118.67%; }
-.shot-character--4 { top: 22.2%; left: 52.1%; width: 46.3%; height: 77.6%; }
-.shot-character--4 img { top: 0.11%; left: -0.08%; width: 202.57%; height: 120.81%; }
-.camera-stage__countdown { position: absolute; top: 20%; left: 22%; z-index: 2; color: #111; font-family: var(--font-display); font-size: clamp(110px, 22vw, 339px); line-height: 1.15; -webkit-text-stroke: 2px #fff; pointer-events: none; }
+.shot-frame-overlay { position: absolute; inset: 0; display: block; overflow: hidden; pointer-events: none; }
+.shot-frame-overlay img { position: absolute; top: -8.333333%; left: -5.555556%; display: block; width: 111.111111%; height: 503.888889%; max-width: none; }
+.shot-frame-overlay--2 img { top: -116.666667%; }
+.shot-frame-overlay--3 img { top: -225%; }
+.shot-frame-overlay--4 img { top: -333.333333%; }
+.camera-stage__countdown { position: absolute; top: 50%; left: 50%; z-index: 2; color: #111; font-family: var(--font-display); font-size: clamp(110px, 22vw, 339px); line-height: 1.15; transform: translate(-50%, -50%); -webkit-text-stroke: 2px #fff; pointer-events: none; }
 .camera-stage__flash { position: absolute; inset: 7.17% 4.76%; z-index: 3; background: #fff; animation: flash .18s ease-out forwards; pointer-events: none; }
 @keyframes flash { from { opacity: .95; } to { opacity: 0; } }
-.shooting-instruction { position: absolute; bottom: 13px; margin: 0; color: #fff; font-size: 14px; font-weight: 400; line-height: 20px; text-align: center; }
+.shooting-instruction { position: absolute; bottom: 13px; margin: 0; color: #fff; font-family: 'HSGooltokki', sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; text-align: center; }
 
 .result-screen__content { display: flex; width: 100%; flex-direction: column; align-items: center; padding-top: 20px; }
-.result-screen h1 { margin-top: 11px; color: #000; font-size: 64px; line-height: 90px; text-align: center; }
+.result-screen h1 { margin-top: 11px; color: var(--color-white); font-size: 64px; line-height: 90px; text-align: center; }
 .result-screen__preview { display: flex; align-items: center; justify-content: center; width: 100%; height: min(553px, calc(100dvh - 347px)); min-height: 200px; margin-top: 20px; }
 .result-screen__image { display: block; width: auto; max-width: 100%; height: 100%; max-height: 553px; object-fit: contain; }
 .result-screen__message { max-width: 420px; margin: 0; color: #fff; font-size: 18px; line-height: 1.5; text-align: center; }
 .result-screen__message .primary-button { width: min(320px, calc(100vw - 32px)); margin: 20px auto 0; }
 .result-screen__button { margin-top: 29px; }
-.result-screen__home { position: absolute; top: 76px; right: 29px; width: 86px; height: 86px; padding: 0; border: 0; border-radius: 50%; background: transparent; }
-.result-screen__home img { display: block; width: 86px; height: 86px; }
+.result-screen__home { position: absolute; top: 109px; right: 32px; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%; background: transparent; }
+.result-screen__home img { display: block; width: 46px; height: 46px; }
 
 @media (max-height: 820px) {
   .result-screen__preview { height: calc(100dvh - 300px); margin-top: 12px; }
@@ -125,8 +130,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
   .camera-message .mascot { width: min(60vw, 378px); height: auto; aspect-ratio: 378 / 258; }
   .camera-message h1 { padding: 0 12px; font-size: clamp(30px, 6vw, 54px); line-height: 1.35; white-space: normal; }
   .result-screen h1 { font-size: clamp(42px, 7vw, 64px); }
-  .result-screen__home { top: 20px; right: 20px; width: 60px; height: 60px; }
-  .result-screen__home img { width: 60px; height: 60px; }
+  .result-screen__home { top: 20px; right: 20px; }
 }
 
 @media (max-height: 680px) {
@@ -147,7 +151,8 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
   .copyright { font-size: 10px; }
   .frame-options { gap: 7px; }
   .frame-option { width: min(29vw, 120px, calc((100dvh - 260px) * 1200 / 3628)); }
-  .frame-option--selected { outline-width: 2px; outline-offset: 3px; }
+  .frame-option--selected .frame-preview::after { inset: -3px; }
+  .frame-option__label { margin-top: 6px; font-size: 18px; line-height: 26px; }
   .camera-stage__progress { font-size: 12px; }
   .camera-stage__countdown { font-size: 90px; -webkit-text-stroke: 1px #fff; }
   .shooting-instruction { bottom: 5px; font-size: 11px; }

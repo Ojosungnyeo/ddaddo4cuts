@@ -1,9 +1,9 @@
 import { FRAMES, type PhotoSession } from '../types'
 
-// Measured from the transparent pixel bounds in all three 1200 × 3628 PNGs.
+// Measured from the transparent pixel bounds in all three 1200 × 3600 PNGs.
 // The character art sits inside these slots and is drawn over the photos.
 const FRAME_WIDTH = 1200
-const FRAME_HEIGHT = 3628
+const FRAME_HEIGHT = 3600
 const PHOTO_SLOTS = [
   { x: 60, y: 60, width: 1080, height: 720 },
   { x: 60, y: 840, width: 1080, height: 720 },
@@ -46,7 +46,7 @@ export async function composeFourCut(session: PhotoSession): Promise<Blob> {
 
   const frameImage = await loadImage(frame.assetPath, '프레임')
   if (frameImage.naturalWidth !== FRAME_WIDTH || frameImage.naturalHeight !== FRAME_HEIGHT) {
-    throw new Error('프레임 이미지 크기가 예상한 1200×3628과 달라요.')
+    throw new Error('프레임 이미지 크기가 예상한 1200×3600과 달라요.')
   }
   const photos = await Promise.all(
     session.photos.map((source, index) => loadImage(source, `${index + 1}번째 사진`)),

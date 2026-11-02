@@ -18,7 +18,7 @@ npm run dev
 ## 프레임 합성
 
 - 프레임 파일은 `public/frames/ddaddo4cuts_white.png`, `ddaddo4cuts_neon.png`, `ddaddo4cuts_black.png`입니다.
-- 세 PNG는 모두 1200×3628입니다. 투명 사진 슬롯은 공통으로 x=60, 너비=1080, 높이=720이고 시작 y는 60, 840, 1620, 2400입니다. 이 좌표는 실제 PNG의 알파 채널에서 확인했습니다.
+- 세 PNG는 모두 1200×3600입니다. 투명 사진 슬롯은 공통으로 x=60, 너비=1080, 높이=720이고 시작 y는 60, 840, 1620, 2400입니다. 이 좌표는 실제 PNG의 알파 채널에서 확인했습니다.
 - 프레임 정보는 `src/types.ts`의 `FRAMES`에, 합성 좌표와 Canvas 로직은 `src/utils/composeFourCut.ts`에 있습니다.
 - 사진 크롭 비율과 좌우 반전 캡처는 `src/utils/captureFrame.ts`에서 관리합니다.
 - 결과 미리보기와 다운로드는 같은 PNG Blob의 Object URL을 사용합니다. 파일명은 다운로드 시 맥북 로컬 시간으로 만듭니다.

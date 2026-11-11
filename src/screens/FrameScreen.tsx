@@ -36,7 +36,7 @@ export function FrameScreen({ selected, uploadConsent, onSelect, onUploadConsent
             checked={uploadConsent}
             onChange={(event) => onUploadConsentChange(event.target.checked)}
           />
-          <span>QR 사진 전달을 위해 완성 사진을 24시간 동안 임시 저장하는 데 동의합니다.</span>
+          <span>QR 사진 전달을 위한 임시 저장 및 자동 삭제에 동의합니다.</span>
         </label>
         <button className="primary-button selection-screen__button" onClick={onContinue}>
           선택한 프레임으로 촬영하기

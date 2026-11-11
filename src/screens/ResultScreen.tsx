@@ -117,7 +117,6 @@ export function ResultScreen({ session, uploadConsent, onRestart }: ResultScreen
               <>
                 <img className="result-screen__qr" src={qrUrl} alt="사진 다운로드용 QR코드" />
                 <p className="result-screen__qr-guide">QR코드를 스캔하여 사진을 다운로드하세요!</p>
-                <p className="result-screen__expiry">사진은 촬영 후 24시간이 지나면 자동으로 삭제됩니다.</p>
               </>
             )}
           </div>

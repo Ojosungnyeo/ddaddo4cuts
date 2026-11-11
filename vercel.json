@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/photo/:token", "destination": "/index.html" }
+  ],
+  "crons": [
+    { "path": "/api/cron/cleanup-photos", "schedule": "0 0 * * *" }
+  ]
+}

@@ -33,7 +33,7 @@ export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }
           </div>
         ) : null}
 
-        <div className={`camera-stage${isShooting && status === 'ready' ? ' camera-stage--visible' : ''}`}>
+        <div className={`camera-stage camera-stage--${frame}${isShooting && status === 'ready' ? ' camera-stage--visible' : ''}`}>
           <div className="camera-stage__viewport">
             <video ref={videoRef} autoPlay muted playsInline aria-label="실시간 카메라 미리보기" />
             {phase === 'freeze' && frozenPhoto && (
@@ -43,7 +43,9 @@ export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }
               <img src={frameImage} alt="" />
             </span>
           </div>
-          <img className="camera-stage__frame" src="/assets/figma-camera-frame.svg" alt="" aria-hidden="true" />
+          <svg className="camera-stage__frame" viewBox="0 0 1150 804.404" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M1121.17 776.911H27.3433V28.8238H1121.17V776.911ZM54.6865 749.418H1092.34V57.6475H54.6865V749.418Z" fill="currentColor" />
+          </svg>
           <span className="camera-stage__progress" aria-label={`${shotNumber} / 4번째 촬영`}>{shotNumber} / 4</span>
           <div className="camera-stage__countdown" aria-live="assertive" aria-atomic="true">
             {isShooting && status === 'ready' && phase === 'countdown' ? countdown : null}

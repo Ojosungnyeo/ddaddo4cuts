@@ -88,22 +88,26 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .camera-message p { max-width: 650px; margin: 12px 16px 0; color: #fff; font-size: 18px; line-height: 1.5; }
 .camera-message .primary-button { width: min(320px, calc(100vw - 32px)); margin-top: 30px; }
 .camera-stage { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
-.camera-screen--shooting .camera-screen__content { min-height: 100dvh; justify-content: center; }
+.camera-stage--white { --camera-frame-color: var(--color-white); --camera-label-color: var(--color-ink); --camera-label-outline: var(--color-white); }
+.camera-stage--black { --camera-frame-color: #000; --camera-label-color: var(--color-white); --camera-label-outline: var(--color-ink); }
+.camera-stage--lime { --camera-frame-color: var(--color-lime); --camera-label-color: var(--color-ink); --camera-label-outline: var(--color-white); }
+.camera-screen--shooting .camera-screen__content { display: grid; min-height: 100dvh; grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr); justify-items: center; }
 .camera-stage--visible { position: relative; width: min(1150px, calc(100vw - 32px), calc((100dvh - 80px) * 1.4298)); height: auto; aspect-ratio: 1150 / 804.404; overflow: hidden; background: var(--color-background); opacity: 1; pointer-events: auto; }
+.camera-screen--shooting .camera-stage { grid-row: 2; }
 .camera-stage__viewport { position: absolute; top: 7.17%; left: 4.76%; width: 90.23%; aspect-ratio: 3 / 2; overflow: hidden; }
 .camera-stage video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scaleX(-1); }
 .camera-stage__frozen-photo { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.camera-stage__frame { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
-.camera-stage__progress { position: absolute; top: 2%; right: 3%; z-index: 2; color: #111; font-family: var(--font-display); font-size: 22px; font-weight: 900; line-height: 1; }
+.camera-stage__frame { position: absolute; inset: 0; display: block; width: 100%; height: 100%; color: var(--camera-frame-color); pointer-events: none; }
+.camera-stage__progress { position: absolute; top: 0; right: 2.507%; z-index: 2; display: flex; height: 3.585%; align-items: center; justify-content: flex-end; color: var(--color-white); font-family: var(--font-display); font-size: clamp(12px, 1.92vw, 22px); font-weight: 900; line-height: 1; text-align: right; }
 .shot-frame-overlay { position: absolute; inset: 0; display: block; overflow: hidden; pointer-events: none; }
 .shot-frame-overlay img { position: absolute; top: -8.333333%; left: -5.555556%; display: block; width: 111.111111%; height: 500%; max-width: none; }
 .shot-frame-overlay--2 img { top: -116.666667%; }
 .shot-frame-overlay--3 img { top: -225%; }
 .shot-frame-overlay--4 img { top: -333.333333%; }
-.camera-stage__countdown { position: absolute; top: 50%; left: 50%; z-index: 2; color: #111; font-family: var(--font-display); font-size: clamp(110px, 22vw, 339px); line-height: 1.15; transform: translate(-50%, -50%); -webkit-text-stroke: 2px #fff; pointer-events: none; }
+.camera-stage__countdown { position: absolute; top: calc(7.17% + clamp(12px, 3.05vw, 35px)); left: 25%; z-index: 2; display: grid; width: 50%; height: clamp(18px, 4.17vw, 48px); place-items: center; color: var(--camera-label-color); font-family: var(--font-display); font-size: clamp(18px, 4.17vw, 48px); font-weight: 900; line-height: 1; -webkit-text-stroke: 1.5px var(--camera-label-outline); paint-order: stroke fill; pointer-events: none; }
 .camera-stage__flash { position: absolute; inset: 7.17% 4.76%; z-index: 3; background: #fff; animation: flash .18s ease-out forwards; pointer-events: none; }
 @keyframes flash { from { opacity: .95; } to { opacity: 0; } }
-.shooting-instruction { position: absolute; bottom: 13px; margin: 0; color: #fff; font-family: 'HSGooltokki', sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; text-align: center; }
+.shooting-instruction { display: flex; grid-row: 3; width: 100%; align-self: stretch; align-items: center; justify-content: center; margin: 0; color: #fff; font-family: 'HSGooltokki', sans-serif; font-size: 18px; font-weight: 400; line-height: 26px; text-align: center; transform: translateY(calc(clamp(4px, 1.2vw, 14px) * -1)); }
 
 .result-screen__content { display: flex; width: 100%; flex-direction: column; align-items: center; padding-top: 20px; }
 .result-screen h1 { margin-top: 11px; color: var(--color-white); font-size: 64px; line-height: 90px; text-align: center; }
@@ -154,9 +158,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
   .frame-option { width: min(29vw, 120px, calc((100dvh - 260px) * 1200 / 3600)); }
   .frame-option--selected .frame-preview::after { inset: -3px; }
   .frame-option__label { margin-top: 6px; font-size: 18px; line-height: 26px; }
-  .camera-stage__progress { font-size: 12px; }
-  .camera-stage__countdown { font-size: 90px; -webkit-text-stroke: 1px #fff; }
-  .shooting-instruction { bottom: 5px; font-size: 11px; }
+  .shooting-instruction { font-size: 14px; line-height: 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

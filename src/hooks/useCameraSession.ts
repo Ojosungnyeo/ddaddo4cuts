@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { captureFrame } from '../utils/captureFrame'
 
 type CameraStatus = 'preparing' | 'ready' | 'error'
+export type CapturePhase = 'countdown' | 'freeze'
+
+const COUNTDOWN_SECONDS = 7
+const FREEZE_MS = 1000
+const TOTAL_SHOTS = 4
 
 function cameraErrorMessage(error: unknown): string {
   if (error instanceof DOMException) {
@@ -33,7 +38,9 @@ export function useCameraSession(
   const [status, setStatus] = useState<CameraStatus>('preparing')
   const [error, setError] = useState<string | null>(null)
   const [shotNumber, setShotNumber] = useState(1)
-  const [countdown, setCountdown] = useState(5)
+  const [phase, setPhase] = useState<CapturePhase>('countdown')
+  const [countdown, setCountdown] = useState(COUNTDOWN_SECONDS)
+  const [frozenPhoto, setFrozenPhoto] = useState<string | null>(null)
   const [flash, setFlash] = useState(false)
 
   useEffect(() => {
@@ -93,9 +100,24 @@ export function useCameraSession(
   useEffect(() => {
     if (!isShooting || status !== 'ready') return
 
+    if (phase === 'freeze') {
+      const timer = window.setTimeout(() => {
+        if (shotNumber === TOTAL_SHOTS) {
+          callbacksRef.current.onComplete(photosRef.current)
+          return
+        }
+
+        setFrozenPhoto(null)
+        setShotNumber((current) => current + 1)
+        setCountdown(COUNTDOWN_SECONDS)
+        setPhase('countdown')
+      }, FREEZE_MS)
+      return () => window.clearTimeout(timer)
+    }
+
     const timer = window.setTimeout(() => {
       if (countdown > 1) {
-        setCountdown(countdown - 1)
+        setCountdown((current) => current - 1)
         return
       }
       if (capturedShotRef.current >= shotNumber) return
@@ -104,15 +126,11 @@ export function useCameraSession(
       try {
         const video = videoRef.current
         if (!video || !streamRef.current?.active) throw new Error('카메라 연결이 끊어졌어요.')
-        photosRef.current = [...photosRef.current, captureFrame(video)]
+        const photo = captureFrame(video)
+        photosRef.current = [...photosRef.current, photo]
+        setFrozenPhoto(photo)
         setFlash(true)
-
-        if (shotNumber === 4) {
-          callbacksRef.current.onComplete(photosRef.current)
-        } else {
-          setShotNumber(shotNumber + 1)
-          setCountdown(5)
-        }
+        setPhase('freeze')
       } catch (caught) {
         streamRef.current?.getTracks().forEach((track) => {
           track.onended = null
@@ -125,7 +143,7 @@ export function useCameraSession(
     }, 1000)
 
     return () => window.clearTimeout(timer)
-  }, [isShooting, status, shotNumber, countdown])
+  }, [isShooting, status, phase, shotNumber, countdown])
 
   useEffect(() => {
     if (!flash) return
@@ -133,5 +151,5 @@ export function useCameraSession(
     return () => window.clearTimeout(timer)
   }, [flash])
 
-  return { videoRef, status, error, shotNumber, countdown, flash }
+  return { videoRef, status, error, shotNumber, phase, countdown, frozenPhoto, flash }
 }

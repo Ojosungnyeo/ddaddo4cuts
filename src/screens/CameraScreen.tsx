@@ -11,7 +11,7 @@ interface CameraScreenProps {
 }
 
 export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }: CameraScreenProps) {
-  const { videoRef, status, error, shotNumber, countdown, flash } = useCameraSession(
+  const { videoRef, status, error, shotNumber, phase, countdown, frozenPhoto, flash } = useCameraSession(
     isShooting, onReady, onComplete,
   )
   const frameImage = FRAMES.find((option) => option.id === frame)?.assetPath
@@ -36,6 +36,9 @@ export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }
         <div className={`camera-stage${isShooting && status === 'ready' ? ' camera-stage--visible' : ''}`}>
           <div className="camera-stage__viewport">
             <video ref={videoRef} autoPlay muted playsInline aria-label="실시간 카메라 미리보기" />
+            {phase === 'freeze' && frozenPhoto && (
+              <img className="camera-stage__frozen-photo" src={frozenPhoto} alt="방금 촬영한 사진" />
+            )}
             <span className={`shot-frame-overlay shot-frame-overlay--${shotNumber}`} aria-hidden="true">
               <img src={frameImage} alt="" />
             </span>
@@ -43,7 +46,7 @@ export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }
           <img className="camera-stage__frame" src="/assets/figma-camera-frame.svg" alt="" aria-hidden="true" />
           <span className="camera-stage__progress" aria-label={`${shotNumber} / 4번째 촬영`}>{shotNumber} / 4</span>
           <div className="camera-stage__countdown" aria-live="assertive" aria-atomic="true">
-            {isShooting && status === 'ready' ? countdown : null}
+            {isShooting && status === 'ready' && phase === 'countdown' ? countdown : null}
           </div>
           {flash && <div className="camera-stage__flash" aria-hidden="true" />}
         </div>

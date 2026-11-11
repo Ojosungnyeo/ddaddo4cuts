@@ -1,6 +1,6 @@
-import { errorResponse, json, methodNotAllowed } from '../../server/http'
-import { serverConfig } from '../../server/config'
-import { supabaseAdmin } from '../../server/supabaseAdmin'
+import { errorResponse, json, methodNotAllowed } from '../../server/http.js'
+import { serverConfig } from '../../server/config.js'
+import { supabaseAdmin } from '../../server/supabaseAdmin.js'
 
 const CLEANUP_BATCH_SIZE = 100
 

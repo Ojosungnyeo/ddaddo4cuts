@@ -1,11 +1,11 @@
-import { serverConfig } from '../../server/config'
-import { ApiError, errorResponse, json, methodNotAllowed } from '../../server/http'
-import { supabaseAdmin } from '../../server/supabaseAdmin'
-import { hashSecret, isValidToken } from '../../server/tokens'
+import { serverConfig } from '../../server/config.js'
+import { ApiError, errorResponse, json, methodNotAllowed } from '../../server/http.js'
+import { supabaseAdmin } from '../../server/supabaseAdmin.js'
+import { hashSecret, isValidToken } from '../../server/tokens.js'
 
 async function getPhoto(request: Request): Promise<Response> {
   const url = new URL(request.url)
-  const token = decodeURIComponent(url.pathname.split('/').filter(Boolean).at(-1) ?? '')
+  const token = decodeURIComponent(url.pathname.split('/').filter(Boolean).pop() ?? '')
   if (!isValidToken(token)) throw new ApiError(404, 'photo_not_found')
 
   const supabase = supabaseAdmin()

@@ -1,5 +1,5 @@
 import { createHmac, randomBytes } from 'node:crypto'
-import { serverConfig } from './config'
+import { serverConfig } from './config.js'
 
 const TOKEN_BYTES = 32
 const TOKEN_PATTERN = /^[A-Za-z0-9_-]{43}$/

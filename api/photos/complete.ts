@@ -1,8 +1,8 @@
-import { serverConfig } from '../../server/config'
-import { ApiError, errorResponse, json, methodNotAllowed, readSmallJson } from '../../server/http'
-import { inspectStorageObject, PHOTO_MIME_TYPE } from '../../server/photoTransfers'
-import { supabaseAdmin } from '../../server/supabaseAdmin'
-import { hashSecret, isValidToken } from '../../server/tokens'
+import { serverConfig } from '../../server/config.js'
+import { ApiError, errorResponse, json, methodNotAllowed, readSmallJson } from '../../server/http.js'
+import { inspectStorageObject, PHOTO_MIME_TYPE } from '../../server/photoTransfers.js'
+import { supabaseAdmin } from '../../server/supabaseAdmin.js'
+import { hashSecret, isValidToken } from '../../server/tokens.js'
 
 interface CompleteBody {
   uploadId?: unknown

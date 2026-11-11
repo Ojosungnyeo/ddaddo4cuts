@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { ApiError } from './http'
+import { ApiError } from './http.js'
 
 export const PHOTO_MIME_TYPE = 'image/png'
 export const PHOTO_LIFETIME_MS = 24 * 60 * 60 * 1000

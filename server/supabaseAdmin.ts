@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
-import { serverConfig } from './config'
-import type { Database } from './database.types'
+import { serverConfig } from './config.js'
+import type { Database } from './database.types.js'
 
 let adminClient: ReturnType<typeof createClient<Database>> | undefined
 

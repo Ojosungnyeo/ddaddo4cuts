@@ -11,11 +11,6 @@ interface ResultScreenProps {
   onRestart: () => void
 }
 
-function downloadFileName(date: Date): string {
-  const pad = (value: number) => String(value).padStart(2, '0')
-  return `ddaddo4cuts_${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}.png`
-}
-
 export function ResultScreen({ session, uploadConsent, onRestart }: ResultScreenProps) {
   const [attempt, setAttempt] = useState(0)
   const [blob, setBlob] = useState<Blob | null>(null)
@@ -68,16 +63,6 @@ export function ResultScreen({ session, uploadConsent, onRestart }: ResultScreen
     return () => { current = false }
   }, [transfer.status, transfer.result])
 
-  function download() {
-    if (!imageUrl) return
-    const link = document.createElement('a')
-    link.href = imageUrl
-    link.download = downloadFileName(new Date())
-    document.body.append(link)
-    link.click()
-    link.remove()
-  }
-
   return (
     <main className="screen result-screen">
       <div className="result-screen__content">
@@ -99,11 +84,10 @@ export function ResultScreen({ session, uploadConsent, onRestart }: ResultScreen
                 <p className="result-screen__message" role="status">네컷 사진을 만드는 중...</p>
               )}
             </div>
-            <button className="primary-button result-screen__button" onClick={download} disabled={!imageUrl}>사진 저장하기</button>
           </div>
           <div className="result-screen__transfer" aria-live="polite">
             {!uploadConsent && (
-              <p>임시 저장에 동의하지 않아 QR 업로드를 진행하지 않았어요.<br />사진 저장하기는 그대로 사용할 수 있습니다.</p>
+              <p>임시 저장에 동의하지 않아 QR 업로드를 진행하지 않았어요.</p>
             )}
             {uploadConsent && transfer.status === 'idle' && <p>사진을 준비하고 있어요...</p>}
             {uploadConsent && transfer.status === 'uploading' && <p role="status">QR 사진을 업로드하는 중...</p>}

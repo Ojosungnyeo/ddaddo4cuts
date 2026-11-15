@@ -86,18 +86,16 @@ export function ResultScreen({ session, uploadConsent, onRestart }: ResultScreen
             </div>
           </div>
           <div className="result-screen__transfer" aria-live="polite">
-            {!uploadConsent && (
-              <p>임시 저장에 동의하지 않아 QR 업로드를 진행하지 않았어요.</p>
-            )}
-            {uploadConsent && transfer.status === 'idle' && <p>사진을 준비하고 있어요...</p>}
-            {uploadConsent && transfer.status === 'uploading' && <p role="status">QR 사진을 업로드하는 중...</p>}
-            {uploadConsent && transfer.status === 'error' && (
+            {transfer.status === 'idle' && <p>사진을 준비하고 있어요...</p>}
+            {transfer.status === 'uploading' && <p role="status">QR 사진을 업로드하는 중...</p>}
+            {transfer.status === 'error' && (
               <div className="result-screen__transfer-error" role="alert">
                 <p>{transfer.error}</p>
                 <button className="primary-button" onClick={transfer.retry}>업로드 다시 시도하기</button>
+                {imageUrl && <a className="primary-button" href={imageUrl} download="ddaddo4cuts.png">PNG 사진 저장하기</a>}
               </div>
             )}
-            {uploadConsent && transfer.status === 'ready' && qrUrl && (
+            {transfer.status === 'ready' && qrUrl && (
               <>
                 <img className="result-screen__qr" src={qrUrl} alt="사진 다운로드용 QR코드" />
                 <p className="result-screen__qr-guide">QR코드를 스캔하여 사진을 다운로드하세요!</p>

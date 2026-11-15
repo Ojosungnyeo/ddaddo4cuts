@@ -4,14 +4,12 @@ import { FRAMES, type FrameId, type FrameTypeId } from '../types'
 interface FrameScreenProps {
   type: FrameTypeId
   selected: FrameId | null
-  uploadConsent: boolean
   onSelect: (frame: FrameId) => void
   onBack: () => void
-  onUploadConsentChange: (consent: boolean) => void
   onContinue: () => void
 }
 
-export function FrameScreen({ type, selected, uploadConsent, onSelect, onBack, onUploadConsentChange, onContinue }: FrameScreenProps) {
+export function FrameScreen({ type, selected, onSelect, onBack, onContinue }: FrameScreenProps) {
   const options = FRAMES.filter((frame) => frame.typeId === type)
   return (
     <main className="screen selection-screen frame-detail-screen">
@@ -35,14 +33,7 @@ export function FrameScreen({ type, selected, uploadConsent, onSelect, onBack, o
           ))}
         </div>
         <div className="selection-screen__actions">
-          <label className="photo-consent">
-            <input
-              type="checkbox"
-              checked={uploadConsent}
-              onChange={(event) => onUploadConsentChange(event.target.checked)}
-            />
-            <span>QR 사진 전달을 위한 임시 저장 및 자동 삭제에 동의합니다.</span>
-          </label>
+          <p className="photo-storage-notice">촬영 시작 시 QR 사진 전달을 위한 임시 저장 및 자동 삭제에 동의합니다.</p>
           <button className="primary-button selection-screen__button" onClick={onContinue} disabled={selected === null}>
             선택한 프레임으로 촬영하기
           </button>

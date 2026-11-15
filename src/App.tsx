@@ -45,16 +45,17 @@ function App() {
         <FrameScreen
           type={selectedType}
           selected={selectedFrame}
-          uploadConsent={uploadConsent}
           onSelect={setSelectedFrame}
           onBack={() => {
             setSelectedFrame(null)
             setSelectedType(null)
             setScreen('frame-types')
           }}
-          onUploadConsentChange={setUploadConsent}
           onContinue={() => {
-            if (selectedFrame !== null) setScreen('preparing')
+            if (selectedFrame !== null) {
+              setUploadConsent(true)
+              setScreen('preparing')
+            }
           }}
         />
       )}

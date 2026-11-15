@@ -91,8 +91,6 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .frame-option__label--lime { color: var(--color-lime); }
 .frame-option__label--black { color: #000; }
 .selection-screen__button { flex: none; height: 52px; margin: 12px 0 clamp(12px, 3dvh, 28px); }
-.photo-consent { display: flex; flex: none; width: fit-content; max-width: calc(100vw - 32px); align-items: center; gap: 10px; margin-top: 10px; color: var(--color-white); font-size: 14px; line-height: 20px; }
-.photo-consent input { flex: none; width: 18px; height: 18px; margin: 0; accent-color: var(--color-lime); }
 .selection-screen .copyright { position: static; flex: none; margin-bottom: 16px; }
 
 .frame-detail-screen { overflow-y: auto; }
@@ -104,7 +102,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .frame-detail-screen .frame-option--selected .frame-preview::after { inset: -8px; }
 .frame-detail-screen .selection-screen__actions { display: flex; flex: none; width: 100%; flex-direction: column; align-items: center; gap: 10px; margin: 12px 0 18px; }
 .frame-detail-screen .selection-screen__button { width: min(610px, calc(100vw - 32px)); height: 56px; margin: 0; }
-.frame-detail-screen .photo-consent { justify-content: center; width: fit-content; max-width: calc(100vw - 32px); margin: 0; text-align: center; }
+.frame-detail-screen .photo-storage-notice { max-width: calc(100vw - 32px); margin: 0; color: var(--color-white); font-size: 14px; line-height: 20px; text-align: center; }
 .frame-detail-screen .copyright { margin-bottom: 16px; }
 
 .camera-screen__content { display: flex; width: 100%; flex-direction: column; align-items: center; }
@@ -148,6 +146,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .result-screen__qr { display: block; width: 100%; max-width: 400px; height: auto; background: var(--color-white); }
 .result-screen__qr-guide { margin-top: 14px !important; font-family: var(--font-display); font-size: 20px !important; line-height: 28px !important; }
 .result-screen__transfer-error .primary-button { width: min(320px, 100%); margin: 18px auto 0; }
+.result-screen__transfer-error a.primary-button { text-decoration: none; }
 .result-screen__transfer-error p { margin: 0; }
 .result-screen__home { position: absolute; top: 109px; right: 32px; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%; background: transparent; }
 .result-screen__home img { display: block; width: 46px; height: 46px; }

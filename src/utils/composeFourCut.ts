@@ -5,10 +5,10 @@ import { FRAMES, type PhotoSession } from '../types'
 const FRAME_WIDTH = 1200
 const FRAME_HEIGHT = 3600
 const PHOTO_SLOTS = [
-  { x: 60, y: 60, width: 1080, height: 720 },
-  { x: 60, y: 840, width: 1080, height: 720 },
-  { x: 60, y: 1620, width: 1080, height: 720 },
-  { x: 60, y: 2400, width: 1080, height: 720 },
+  { x: 60, y: 260, width: 1080, height: 640 },
+  { x: 60, y: 960, width: 1080, height: 640 },
+  { x: 60, y: 1660, width: 1080, height: 640 },
+  { x: 60, y: 2360, width: 1080, height: 640 },
 ] as const
 
 function loadImage(source: string, label: string): Promise<HTMLImageElement> {

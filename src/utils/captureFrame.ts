@@ -1,5 +1,5 @@
-// Match the 1080 × 720 transparent slots in every final frame.
-export const PHOTO_ASPECT_RATIO = 3 / 2
+// Match the 1080 × 640 transparent slots in every final frame.
+export const PHOTO_ASPECT_RATIO = 1080 / 640
 const OUTPUT_WIDTH = 1080
 
 export function captureFrame(video: HTMLVideoElement): string {

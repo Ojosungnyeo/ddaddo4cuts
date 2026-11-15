@@ -43,8 +43,8 @@ export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }
               <img src={frameImage} alt="" />
             </span>
           </div>
-          <svg className="camera-stage__frame" viewBox="0 0 1150 804.404" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M1121.17 776.911H27.3433V28.8238H1121.17V776.911ZM54.6865 749.418H1092.34V57.6475H54.6865V749.418Z" fill="currentColor" />
+          <svg className="camera-stage__frame" viewBox="0 0 1150 730.2" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M1121.17 701.376H27.3433V28.8238H1121.17V701.376ZM54.6865 672.553H1092.34V57.6475H54.6865V672.553Z" fill="currentColor" />
           </svg>
           <span className="camera-stage__progress" aria-label={`${shotNumber} / 4번째 촬영`}>{shotNumber} / 4</span>
           <div className="camera-stage__countdown" aria-live="assertive" aria-atomic="true">

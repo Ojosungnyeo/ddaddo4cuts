@@ -14,7 +14,7 @@ interface FrameScreenProps {
 export function FrameScreen({ type, selected, uploadConsent, onSelect, onBack, onUploadConsentChange, onContinue }: FrameScreenProps) {
   const options = FRAMES.filter((frame) => frame.typeId === type)
   return (
-    <main className="screen selection-screen">
+    <main className="screen selection-screen frame-detail-screen">
       <button className="selection-back" onClick={onBack} aria-label="프레임 유형 선택으로 돌아가기" />
       <div className="selection-screen__content">
         <h1>프레임을 골라주세따.</h1>
@@ -34,17 +34,19 @@ export function FrameScreen({ type, selected, uploadConsent, onSelect, onBack, o
             </button>
           ))}
         </div>
-        <label className="photo-consent">
-          <input
-            type="checkbox"
-            checked={uploadConsent}
-            onChange={(event) => onUploadConsentChange(event.target.checked)}
-          />
-          <span>QR 사진 전달을 위한 임시 저장 및 자동 삭제에 동의합니다.</span>
-        </label>
-        <button className="primary-button selection-screen__button" onClick={onContinue} disabled={selected === null}>
-          선택한 프레임으로 촬영하기
-        </button>
+        <div className="selection-screen__actions">
+          <label className="photo-consent">
+            <input
+              type="checkbox"
+              checked={uploadConsent}
+              onChange={(event) => onUploadConsentChange(event.target.checked)}
+            />
+            <span>QR 사진 전달을 위한 임시 저장 및 자동 삭제에 동의합니다.</span>
+          </label>
+          <button className="primary-button selection-screen__button" onClick={onContinue} disabled={selected === null}>
+            선택한 프레임으로 촬영하기
+          </button>
+        </div>
       </div>
       <small className="copyright">Copyright ⓒ 2026. DDADDO All rights reserved.</small>
     </main>

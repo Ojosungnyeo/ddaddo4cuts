@@ -96,22 +96,16 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .selection-screen .copyright { position: static; flex: none; margin-bottom: 16px; }
 
 .frame-detail-screen { overflow-y: auto; }
-.frame-detail-screen .selection-screen__content { flex: 1 0 auto; padding-top: 38px; }
-.frame-detail-screen h1 { font-size: 64px; line-height: 90px; }
-.frame-detail-screen .frame-options { flex: 1 0 auto; gap: 114px; margin-top: 18px; }
-.frame-detail-screen .frame-option { width: 193.5px; }
+.frame-detail-screen .selection-screen__content { flex: 1 0 auto; padding-top: clamp(20px, 4.2dvh, 38px); }
+.frame-detail-screen h1 { font-size: clamp(40px, 7.1dvh, 64px); line-height: 1.4; }
+.frame-detail-screen .frame-options { flex: 1 0 auto; gap: clamp(24px, 7vw, 100px); margin-top: clamp(8px, 2dvh, 18px); }
+.frame-detail-screen .frame-option { width: min(172px, 25vw, max(70px, calc((100dvh - 360px) / 3))); }
 .frame-detail-screen .frame-option__label { margin-top: 8px; }
-.frame-detail-screen .frame-option--selected .frame-preview::after { inset: -21px -28px -5px; }
-.selection-screen__actions { position: relative; display: flex; flex: none; width: 100%; align-items: center; justify-content: center; margin-bottom: 20px; }
-.selection-screen__actions .photo-consent { position: absolute; top: 50%; left: calc(50% + 320px); width: calc(50% - 336px); max-width: none; margin: 0; transform: translateY(-50%); }
-.selection-screen__actions .selection-screen__button { height: 56px; margin: 0; }
-
-@media (max-width: 1279px), (max-height: 820px) {
-  .frame-detail-screen .frame-option { width: min(193.5px, 25vw, max(72px, calc((100dvh - 350px) / 3))); }
-  .frame-detail-screen .frame-option--selected .frame-preview::after { inset: -8px; }
-  .selection-screen__actions { flex-direction: column; gap: 10px; margin-bottom: 12px; }
-  .selection-screen__actions .photo-consent { position: static; width: fit-content; max-width: calc(100vw - 32px); transform: none; }
-}
+.frame-detail-screen .frame-option--selected .frame-preview::after { inset: -8px; }
+.frame-detail-screen .selection-screen__actions { display: flex; flex: none; width: 100%; flex-direction: column; align-items: center; gap: 10px; margin: 12px 0 18px; }
+.frame-detail-screen .selection-screen__button { width: min(610px, calc(100vw - 32px)); height: 56px; margin: 0; }
+.frame-detail-screen .photo-consent { justify-content: center; width: fit-content; max-width: calc(100vw - 32px); margin: 0; text-align: center; }
+.frame-detail-screen .copyright { margin-bottom: 16px; }
 
 .camera-screen__content { display: flex; width: 100%; flex-direction: column; align-items: center; }
 .camera-message { position: absolute; top: clamp(60px, calc(50dvh - 236px), 214px); left: 50%; display: flex; width: min(100%, 1100px); flex-direction: column; align-items: center; text-align: center; transform: translateX(-50%); }
@@ -180,8 +174,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
   .frame-detail-screen .selection-screen__content { padding-top: 80px; }
   .frame-detail-screen h1 { font-size: clamp(32px, 7.4vw, 58px); line-height: 1.35; }
   .frame-detail-screen .frame-options { gap: clamp(10px, 4vw, 45px); }
-  .frame-detail-screen .frame-option { width: min(25vw, max(72px, calc((100dvh - 350px) / 3))); }
-  .frame-detail-screen .frame-option--selected .frame-preview::after { inset: -8px; }
+  .frame-detail-screen .frame-option { width: min(25vw, max(70px, calc((100dvh - 360px) / 3))); }
   .selection-back { top: 20px; left: 20px; }
   .frame-type-options { gap: 20px; }
   .frame-type-option { height: auto; min-height: 300px; padding: 36px 12px 28px; }
@@ -224,9 +217,9 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 @media (max-width: 500px) {
   .frame-detail-screen .selection-screen__content { padding-top: 72px; }
   .frame-detail-screen .frame-options { gap: 7px; margin-top: 12px; }
-  .frame-detail-screen .frame-option { width: min(29vw, 120px, max(72px, calc((100dvh - 260px) / 3))); }
+  .frame-detail-screen .frame-option { width: min(29vw, 120px, max(70px, calc((100dvh - 360px) / 3))); }
   .frame-detail-screen .frame-option__label { margin-top: 6px; }
-  .frame-detail-screen .frame-option--selected .frame-preview::after { inset: -3px; }
+  .frame-detail-screen .frame-option--selected .frame-preview::after { inset: -6px; border-width: 3px; }
   .frame-type-options { flex-direction: column; align-items: center; gap: 16px; margin: 36px 0 24px; }
   .frame-type-option { flex: none; width: min(100%, 360px); min-height: 230px; padding: 22px 12px; }
   .frame-type-option__image { width: 100px; height: 112px; }

@@ -12,11 +12,11 @@ interface FrameScreenProps {
 export function FrameScreen({ type, selected, onSelect, onBack, onContinue }: FrameScreenProps) {
   const options = FRAMES.filter((frame) => frame.typeId === type)
   return (
-    <main className="screen selection-screen frame-detail-screen">
+    <main className={`screen selection-screen frame-detail-screen frame-detail-screen--${type}`}>
       <button className="selection-back" onClick={onBack} aria-label="프레임 유형 선택으로 돌아가기" />
       <div className="selection-screen__content">
-        <h1>프레임을 골라주세따.</h1>
-        <div className="frame-options" role="group" aria-label="프레임 색상 선택">
+        <h1>{type === 'travel' ? '프레임을 골라주세요.' : '프레임을 골라주세따.'}</h1>
+        <div className="frame-options" role="group" aria-label="프레임 선택">
           {options.map((option) => (
             <button
               className={`frame-option${selected === option.id ? ' frame-option--selected' : ''}`}
@@ -27,7 +27,7 @@ export function FrameScreen({ type, selected, onSelect, onBack, onContinue }: Fr
             >
               <FramePreview frame={option.id} />
               <span className={`frame-option__label frame-option__label--${option.id}`}>
-                {option.label.toLowerCase()}
+                {type === 'travel' ? option.label : option.label.toLowerCase()}
               </span>
             </button>
           ))}

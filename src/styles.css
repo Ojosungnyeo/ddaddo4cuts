@@ -104,6 +104,9 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .frame-detail-screen .selection-screen__button { width: min(610px, calc(100vw - 32px)); height: 56px; margin: 0; }
 .frame-detail-screen .photo-storage-notice { max-width: calc(100vw - 32px); margin: 0; color: var(--color-white); font-size: 14px; line-height: 20px; text-align: center; }
 .frame-detail-screen .copyright { margin-bottom: 16px; }
+.frame-detail-screen--travel .frame-options { gap: clamp(7px, 7vw, 100px); }
+.frame-detail-screen--travel .frame-option { width: min(172px, 20vw, max(60px, calc((100dvh - 360px) / 3))); }
+.frame-detail-screen--travel .frame-option--selected .frame-preview::after { inset: -13px; }
 
 .camera-screen__content { display: flex; width: 100%; flex-direction: column; align-items: center; }
 .camera-message { position: absolute; top: clamp(60px, calc(50dvh - 236px), 214px); left: 50%; display: flex; width: min(100%, 1100px); flex-direction: column; align-items: center; text-align: center; transform: translateX(-50%); }
@@ -114,6 +117,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .camera-stage--white { --camera-frame-color: var(--color-white); --camera-label-color: var(--color-ink); --camera-label-outline: var(--color-white); }
 .camera-stage--black { --camera-frame-color: #000; --camera-label-color: var(--color-white); --camera-label-outline: var(--color-ink); }
 .camera-stage--lime { --camera-frame-color: var(--color-lime); --camera-label-color: var(--color-ink); --camera-label-outline: var(--color-white); }
+.camera-stage--newyork, .camera-stage--shanghai, .camera-stage--tokyo, .camera-stage--paris { --camera-frame-color: #000; --camera-label-color: var(--color-white); --camera-label-outline: var(--color-ink); }
 .camera-screen--shooting .camera-screen__content { display: grid; min-height: 100dvh; grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr); justify-items: center; }
 .camera-stage--visible { position: relative; width: min(1150px, calc(100vw - 32px), calc((100dvh - 80px) * 1.5749)); height: auto; aspect-ratio: 1150 / 730.2; overflow: hidden; background: var(--color-background); opacity: 1; pointer-events: auto; }
 .camera-screen--shooting .camera-stage { grid-row: 2; }
@@ -174,6 +178,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
   .frame-detail-screen h1 { font-size: clamp(32px, 7.4vw, 58px); line-height: 1.35; }
   .frame-detail-screen .frame-options { gap: clamp(10px, 4vw, 45px); }
   .frame-detail-screen .frame-option { width: min(25vw, max(70px, calc((100dvh - 360px) / 3))); }
+  .frame-detail-screen--travel .frame-options { gap: clamp(7px, 2vw, 16px); }
   .selection-back { top: 20px; left: 20px; }
   .frame-type-options { gap: 20px; }
   .frame-type-option { height: auto; min-height: 300px; padding: 36px 12px 28px; }

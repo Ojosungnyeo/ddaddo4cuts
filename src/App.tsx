@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { CameraScreen } from './screens/CameraScreen'
 import { FrameScreen } from './screens/FrameScreen'
+import { FrameTypeScreen } from './screens/FrameTypeScreen'
 import { HomeScreen } from './screens/HomeScreen'
 import { MobilePhotoScreen } from './screens/MobilePhotoScreen'
 import { ResultScreen } from './screens/ResultScreen'
-import type { FrameId, PhotoSession, Screen } from './types'
+import { FRAMES, type FrameId, type FrameTypeId, type PhotoSession, type Screen } from './types'
 
 function App() {
   const [screen, setScreen] = useState<Screen>('home')
-  const [selectedFrame, setSelectedFrame] = useState<FrameId>('lime')
+  const [selectedFrame, setSelectedFrame] = useState<FrameId | null>(null)
+  const [selectedType, setSelectedType] = useState<FrameTypeId | null>(null)
   const [session, setSession] = useState<PhotoSession | null>(null)
   const [cameraAttempt, setCameraAttempt] = useState(0)
   const [uploadConsent, setUploadConsent] = useState(false)
@@ -18,24 +20,45 @@ function App() {
 
   function restart() {
     setSession(null)
-    setSelectedFrame('lime')
+    setSelectedFrame(null)
+    setSelectedType(null)
     setUploadConsent(false)
     setScreen('home')
   }
 
   return (
     <div className="app-shell">
-      {screen === 'home' && <HomeScreen onStart={() => setScreen('frames')} />}
-      {screen === 'frames' && (
+      {screen === 'home' && <HomeScreen onStart={() => setScreen('frame-types')} />}
+      {screen === 'frame-types' && (
+        <FrameTypeScreen
+          onBack={() => setScreen('home')}
+          onSelect={(type) => {
+            const options = FRAMES.filter((frame) => frame.typeId === type)
+            if (!options.length) return
+            setSelectedType(type)
+            setSelectedFrame(null)
+            setScreen('frames')
+          }}
+        />
+      )}
+      {screen === 'frames' && selectedType && (
         <FrameScreen
+          type={selectedType}
           selected={selectedFrame}
           uploadConsent={uploadConsent}
           onSelect={setSelectedFrame}
+          onBack={() => {
+            setSelectedFrame(null)
+            setSelectedType(null)
+            setScreen('frame-types')
+          }}
           onUploadConsentChange={setUploadConsent}
-          onContinue={() => setScreen('preparing')}
+          onContinue={() => {
+            if (selectedFrame !== null) setScreen('preparing')
+          }}
         />
       )}
-      {(screen === 'preparing' || screen === 'shooting') && (
+      {(screen === 'preparing' || screen === 'shooting') && selectedFrame !== null && (
         <CameraScreen
           key={cameraAttempt}
           frame={selectedFrame}

@@ -68,8 +68,19 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .home-screen__button { margin-top: 63px; }
 
 .selection-screen { flex-direction: column; align-items: center; }
+.selection-back { position: absolute; z-index: 1; top: 55px; left: 53px; display: grid; place-items: center; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%; background: #aaa; color: #fff; }
+.selection-back::after { width: 14px; height: 14px; margin-left: 5px; border-bottom: 2px solid currentColor; border-left: 2px solid currentColor; transform: rotate(45deg); content: ''; }
 .selection-screen__content { display: flex; flex: 1 1 auto; min-height: 0; width: 100%; flex-direction: column; align-items: center; padding: clamp(16px, 4dvh, 38px) 16px 0; }
 .selection-screen h1 { color: #fff; font-size: clamp(38px, 7dvh, 60px); line-height: 1.35; text-align: center; }
+.frame-type-options { display: flex; justify-content: center; gap: 40px; width: 100%; margin-top: clamp(40px, 13.5dvh, 122px); }
+.frame-type-option { position: relative; display: flex; flex: 0 1 600px; height: 400px; flex-direction: column; align-items: center; padding: 52px 16px 38px; border: 1px solid #fff; border-radius: 16px; background: var(--color-ink); color: var(--color-lime); }
+.frame-type-option:disabled { cursor: default; }
+.frame-type-option__badge { position: absolute; top: 18px; right: 18px; padding: 5px 10px; border: 1px solid var(--color-lime); border-radius: 999px; font-size: 14px; line-height: 20px; }
+.frame-type-option__image { position: relative; display: block; width: 162px; height: 180px; overflow: hidden; }
+.frame-type-option__image img { position: absolute; display: block; height: 100%; max-width: none; }
+.frame-type-option--basic .frame-type-option__image img { left: -41.6%; width: 193.4%; }
+.frame-type-option--travel .frame-type-option__image img { left: -57.64%; width: 207.47%; }
+.frame-type-option__label { margin-top: 18px; font-family: var(--font-display); font-size: 64px; font-weight: 900; line-height: 1.2; white-space: nowrap; }
 .frame-options { display: flex; flex: 1 1 auto; min-height: 0; align-items: flex-start; justify-content: center; gap: clamp(24px, 7.8vw, 112px); width: 100%; margin-top: clamp(8px, 2dvh, 18px); }
 .frame-option { display: flex; flex: none; width: min(186.88px, max(76px, calc((100dvh - 330px) * 1200 / 3600))); height: auto; flex-direction: column; align-items: center; padding: 0; border: 0; background: transparent; }
 .frame-preview { position: relative; width: 100%; background: var(--color-background); color: #fff; }
@@ -148,6 +159,11 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 }
 
 @media (max-width: 800px) {
+  .selection-back { top: 20px; left: 20px; }
+  .frame-type-options { gap: 20px; }
+  .frame-type-option { height: auto; min-height: 300px; padding: 36px 12px 28px; }
+  .frame-type-option__image { width: 120px; height: 134px; }
+  .frame-type-option__label { margin-top: 20px; font-size: clamp(24px, 5vw, 48px); }
   .brand { gap: 8px; }
   .brand .mascot { width: clamp(88px, 18vw, 180px); height: auto; aspect-ratio: 230 / 157; }
   .brand > span:last-child { font-size: clamp(48px, 9vw, 92px); line-height: 1.15; }
@@ -183,6 +199,11 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 }
 
 @media (max-width: 500px) {
+  .frame-type-options { flex-direction: column; align-items: center; gap: 16px; margin: 36px 0 24px; }
+  .frame-type-option { flex: none; width: min(100%, 360px); min-height: 230px; padding: 22px 12px; }
+  .frame-type-option__image { width: 100px; height: 112px; }
+  .frame-type-option__label { margin-top: 10px; font-size: 36px; }
+  .frame-type-option__badge { top: 12px; right: 12px; font-size: 12px; }
   .primary-button { font-size: 16px; }
   .copyright { font-size: 10px; }
   .frame-options { gap: 7px; }

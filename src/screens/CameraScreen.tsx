@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Mascot } from '../components/Mascot'
 import { useCameraSession } from '../hooks/useCameraSession'
 import { FRAMES, type FrameId } from '../types'
@@ -14,7 +15,11 @@ export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }
   const { videoRef, status, error, shotNumber, phase, countdown, frozenPhoto, flash } = useCameraSession(
     isShooting, onReady, onComplete,
   )
-  const frameImage = FRAMES.find((option) => option.id === frame)?.assetPath
+  const frameOption = FRAMES.find((option) => option.id === frame)
+  const frameImage = frameOption?.assetPath
+  const frameStyle = frameOption?.cameraFrameColor
+    ? { '--camera-frame-color': frameOption.cameraFrameColor } as CSSProperties
+    : undefined
 
   return (
     <main className={`screen camera-screen${isShooting && status === 'ready' ? ' camera-screen--shooting' : ''}`}>
@@ -33,7 +38,7 @@ export function CameraScreen({ frame, isShooting, onReady, onComplete, onRetry }
           </div>
         ) : null}
 
-        <div className={`camera-stage camera-stage--${frame}${isShooting && status === 'ready' ? ' camera-stage--visible' : ''}`}>
+        <div className={`camera-stage camera-stage--${frame}${isShooting && status === 'ready' ? ' camera-stage--visible' : ''}`} style={frameStyle}>
           <div className="camera-stage__viewport">
             <video ref={videoRef} autoPlay muted playsInline aria-label="실시간 카메라 미리보기" />
             {phase === 'freeze' && frozenPhoto && (

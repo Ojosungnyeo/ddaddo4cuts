@@ -117,7 +117,7 @@ button:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
 .camera-stage--white { --camera-frame-color: var(--color-white); --camera-label-color: var(--color-ink); --camera-label-outline: var(--color-white); }
 .camera-stage--black { --camera-frame-color: #000; --camera-label-color: var(--color-white); --camera-label-outline: var(--color-ink); }
 .camera-stage--lime { --camera-frame-color: var(--color-lime); --camera-label-color: var(--color-ink); --camera-label-outline: var(--color-white); }
-.camera-stage--newyork, .camera-stage--shanghai, .camera-stage--tokyo, .camera-stage--paris { --camera-frame-color: #000; --camera-label-color: var(--color-white); --camera-label-outline: var(--color-ink); }
+.camera-stage--newyork, .camera-stage--shanghai, .camera-stage--tokyo, .camera-stage--paris { --camera-label-color: var(--color-white); --camera-label-outline: var(--color-ink); }
 .camera-screen--shooting .camera-screen__content { display: grid; min-height: 100dvh; grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr); justify-items: center; }
 .camera-stage--visible { position: relative; width: min(1150px, calc(100vw - 32px), calc((100dvh - 80px) * 1.5749)); height: auto; aspect-ratio: 1150 / 730.2; overflow: hidden; background: var(--color-background); opacity: 1; pointer-events: auto; }
 .camera-screen--shooting .camera-stage { grid-row: 2; }

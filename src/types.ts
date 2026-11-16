@@ -18,16 +18,17 @@ export interface FrameOption {
   typeId: FrameTypeId
   label: string
   assetPath: string
+  cameraFrameColor?: string
 }
 
 export const FRAMES: FrameOption[] = [
   { id: 'white', typeId: 'basic', label: 'White', assetPath: '/frames/ddaddo4cuts_white.png' },
   { id: 'lime', typeId: 'basic', label: 'Neon', assetPath: '/frames/ddaddo4cuts_neon.png' },
   { id: 'black', typeId: 'basic', label: 'Black', assetPath: '/frames/ddaddo4cuts_black.png' },
-  { id: 'newyork', typeId: 'travel', label: 'Newyork', assetPath: '/frames/ddaddo4cuts_newyork.png' },
-  { id: 'shanghai', typeId: 'travel', label: 'Shanghai', assetPath: '/frames/ddaddo4cuts_shanghai.png' },
-  { id: 'tokyo', typeId: 'travel', label: 'Tokyo', assetPath: '/frames/ddaddo4cuts_tokyo.png' },
-  { id: 'paris', typeId: 'travel', label: 'Paris', assetPath: '/frames/ddaddo4cuts_paris.png' },
+  { id: 'newyork', typeId: 'travel', label: 'Newyork', assetPath: '/frames/ddaddo4cuts_newyork.png', cameraFrameColor: '#000000' },
+  { id: 'shanghai', typeId: 'travel', label: 'Shanghai', assetPath: '/frames/ddaddo4cuts_shanghai.png', cameraFrameColor: '#BB0909' },
+  { id: 'tokyo', typeId: 'travel', label: 'Tokyo', assetPath: '/frames/ddaddo4cuts_tokyo.png', cameraFrameColor: '#9D6495' },
+  { id: 'paris', typeId: 'travel', label: 'Paris', assetPath: '/frames/ddaddo4cuts_paris.png', cameraFrameColor: '#313978' },
 ]
 
 export interface PhotoSession {

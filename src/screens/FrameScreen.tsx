@@ -15,7 +15,7 @@ export function FrameScreen({ type, selected, onSelect, onBack, onContinue }: Fr
     <main className={`screen selection-screen frame-detail-screen frame-detail-screen--${type}`}>
       <button className="selection-back" onClick={onBack} aria-label="프레임 유형 선택으로 돌아가기" />
       <div className="selection-screen__content">
-        <h1>{type === 'travel' ? '프레임을 골라주세요.' : '프레임을 골라주세따.'}</h1>
+        <h1>{type === 'travel' ? '프레임을 골라주세따.' : '프레임을 골라주세따.'}</h1>
         <div className="frame-options" role="group" aria-label="프레임 선택">
           {options.map((option) => (
             <button

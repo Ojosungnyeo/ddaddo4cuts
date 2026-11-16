@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { transferPhoto, type PhotoTransferResult } from './api'
 
-type TransferStatus = 'idle' | 'uploading' | 'ready' | 'error'
+type TransferStatus = 'idle' | 'uploading' | 'delayed' | 'ready' | 'error'
+const SLOW_TRANSFER_MS = 30_000
 
 export function usePhotoTransfer(blob: Blob | null, enabled: boolean) {
   const [status, setStatus] = useState<TransferStatus>('idle')
@@ -19,18 +20,23 @@ export function usePhotoTransfer(blob: Blob | null, enabled: boolean) {
     }
 
     setStatus('uploading')
+    const slowTimer = window.setTimeout(() => {
+      if (current) setStatus('delayed')
+    }, SLOW_TRANSFER_MS)
     void transferPhoto(blob)
       .then((nextResult) => {
         if (!current) return
+        window.clearTimeout(slowTimer)
         setResult(nextResult)
         setStatus('ready')
       })
       .catch((caught: unknown) => {
         if (!current) return
+        window.clearTimeout(slowTimer)
         setError(caught instanceof Error ? caught.message : '사진 업로드에 실패했어요.')
         setStatus('error')
       })
-    return () => { current = false }
+    return () => { current = false; window.clearTimeout(slowTimer) }
   }, [blob, enabled, attempt])
 
   const retry = useCallback(() => setAttempt((value) => value + 1), [])

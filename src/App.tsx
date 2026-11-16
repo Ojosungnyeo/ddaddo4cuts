@@ -14,6 +14,7 @@ function App() {
   const [session, setSession] = useState<PhotoSession | null>(null)
   const [cameraAttempt, setCameraAttempt] = useState(0)
   const [uploadConsent, setUploadConsent] = useState(false)
+  const [resultStartedAt, setResultStartedAt] = useState(0)
 
   const photoRoute = window.location.pathname.match(/^\/photo\/([^/]*)\/?$/)
   if (photoRoute) return <MobilePhotoScreen token={photoRoute[1]} />
@@ -66,6 +67,7 @@ function App() {
           isShooting={screen === 'shooting'}
           onReady={() => setScreen('shooting')}
           onComplete={(photos) => {
+            setResultStartedAt(performance.now())
             setSession({ frame: selectedFrame, photos })
             setScreen('result')
           }}
@@ -76,7 +78,7 @@ function App() {
         />
       )}
       {screen === 'result' && session && (
-        <ResultScreen session={session} uploadConsent={uploadConsent} onRestart={restart} />
+        <ResultScreen session={session} uploadConsent={uploadConsent} resultStartedAt={resultStartedAt} onRestart={restart} />
       )}
     </div>
   )
